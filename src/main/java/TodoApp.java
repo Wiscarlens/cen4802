@@ -2,7 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class TodoApp {
+
     private List<String> todoList;
 
     public TodoApp() {
@@ -22,6 +24,16 @@ public class TodoApp {
     }
 
     public static void main(String[] args) {
+        // Set the Datadog API key as a system property
+        System.setProperty("datadog.api.key", "4bc6267b78492c5f83c34c18df2b3348");
+
+        // Enable DataDog agent instrumentation
+        System.setProperty("datadog.tracer.agent.enabled", "true");
+
+        // Set the service name for your application
+        System.setProperty("datadog.service.name", "your-application-name");
+
+
         TodoApp todoApp = new TodoApp();
         Scanner scanner = new Scanner(System.in);
 
@@ -58,6 +70,11 @@ public class TodoApp {
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
             }
+
+            shutdown();
         }
+    }
+
+    private static void shutdown() {
     }
 }
